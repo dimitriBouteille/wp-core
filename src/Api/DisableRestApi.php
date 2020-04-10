@@ -24,7 +24,7 @@ class DisableRestApi
                 return $result;
             }
             if ( ! is_user_logged_in() ) {
-                return new \WP_Error( 'invalid_access', 'Oops, impossible d\'accéder à cette page :(' );
+                return new \WP_Error( __('invalid_access', 'Oops, impossible d\'accéder à cette page :('));
             }
         });
     }

@@ -159,10 +159,12 @@ class PostType
 
     /**
      * Save the new post type in Wordpress
+     * @return $this
      */
-    public function register()
+    public function register(): self
     {
-        register_post_type($this->slug, $this->arguments);
+        $this->instance = register_post_type($this->slug, $this->arguments);
+        return $this;
     }
 
     /**
