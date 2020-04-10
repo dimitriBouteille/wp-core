@@ -58,16 +58,6 @@ class PostType
      * @param array $labels
      * @return $this
      */
-    public function setLabels(array $labels): self
-    {
-        $this->arguments['labels'] = $labels;
-        return $this;
-    }
-
-    /**
-     * @param array $labels
-     * @return $this
-     */
     public function addLabels(array $labels): self
     {
         $this->arguments['labels'] = array_merge($this->arguments['labels'], $labels);
