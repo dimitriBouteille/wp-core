@@ -18,9 +18,9 @@ abstract class AbstractForm
 {
 
     /**
-     * @var self
+     * @var self[]
      */
-    protected static $instance;
+    protected static $instances = [];
 
     /**
      * Form action
@@ -145,11 +145,12 @@ abstract class AbstractForm
      */
     public static function getInstance(): self
     {
-        if(!self::$instance) {
-            self::$instance = new static();
+        $class = get_called_class();
+        if(!key_exists($class, self::$instances)) {
+            self::$instances[$class] = new static();
         }
 
-        return self::$instance;
+        return self::$instances[$class];
     }
 
 }

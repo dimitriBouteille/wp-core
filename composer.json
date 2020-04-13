@@ -11,7 +11,7 @@
       "role": "Developer"
     }
   ],
-  "keywords": ["wordpress", "wp", "form", "comment", "login", "user", "page", "postType", "twig"],
+  "keywords": ["wordpress", "wp", "form", "comment", "login", "user", "page", "postType", "twig", "validator", "notice", "helpers"],
   "homepage": "https://github.com/dimitriBouteille/wp-core/",
   "support": {
     "issues": "https://github.com/dimitriBouteille/wp-core/issues"
