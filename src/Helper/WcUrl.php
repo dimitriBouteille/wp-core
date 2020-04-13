@@ -20,7 +20,7 @@ class WcUrl
      *
      * @return string|null
      */
-    public static function myAccount(): ?string
+    public static function myAccountUrl(): ?string
     {
         return static::getUrl('myaccount');
     }
@@ -41,7 +41,7 @@ class WcUrl
      *
      * @return string|null
      */
-    public static function shop(): ?string
+    public static function shopUrl(): ?string
     {
         return static::getUrl('shop');
     }
@@ -51,7 +51,7 @@ class WcUrl
      *
      * @return string|null
      */
-    public static function cart(): ?string
+    public static function cartUrl(): ?string
     {
        return static::getUrl('cart');
     }
@@ -61,7 +61,7 @@ class WcUrl
      *
      * @return string|null
      */
-    public static function checkout(): ?string
+    public static function checkoutUrl(): ?string
     {
         return static::getUrl('checkout');
     }
