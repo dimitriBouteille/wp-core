@@ -86,7 +86,7 @@ abstract class AbstractForm
      */
     public function submit(): void
     {
-        $request = new Request($_REQUEST);
+        $request = new Request($_REQUEST, [], [], $_COOKIE, $_FILES, $_SERVER);
         if(wp_verify_nonce($request->get($this->nonceFieldName), $this->nonceName, false) === false) {
             $response = $this->invalidNonce();
         } else {
@@ -123,7 +123,7 @@ abstract class AbstractForm
      */
     protected function sendResponse(Response $response): void
     {
-        wp_send_json($response->getContent(), $response->getStatusCode());
+        $response->send();
         die;
     }
 
