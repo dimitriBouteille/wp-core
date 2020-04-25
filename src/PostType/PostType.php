@@ -27,9 +27,9 @@ class PostType
      * @var array
      */
     protected $arguments = [
-        'labels' => [],
-        'public' => true,
-        'show_in_rest' => false,
+        'labels' =>         [],
+        'public' =>         true,
+        'show_in_rest' =>   false,
     ];
 
     /**
@@ -86,42 +86,6 @@ class PostType
     }
 
     /**
-     * @param string $icon
-     * @return $this
-     */
-    public function setMenuIcon(string $icon): self
-    {
-        return $this->addArgument('menu_icon', $icon);
-    }
-
-    /**
-     * @param string $show
-     * @return $this
-     */
-    public function setShowInMenu(string $show): self
-    {
-        return $this->addArgument('show_in_menu', $show);
-    }
-
-    /**
-     * @param bool $show
-     * @return $this
-     */
-    public function setShowInRest(bool $show): self
-    {
-        return $this->addArgument('show_in_rest', $show);
-    }
-
-    /**
-     * @param bool $public
-     * @return $this
-     */
-    public function setPublic(bool $public): self
-    {
-        return $this->addArgument('public', $public);
-    }
-
-    /**
      * @return array
      */
     public function getArguments(): array
@@ -132,7 +96,7 @@ class PostType
     /**
      * @return \WP_Error|\WP_Post_Type
      */
-    public function getWpPostType()
+    public function getWpInstance()
     {
         return $this->instance;
     }
