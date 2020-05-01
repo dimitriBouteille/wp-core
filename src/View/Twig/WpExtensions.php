@@ -123,6 +123,13 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
                 return the_widget($widget, $widgetArguments, $args);
             }, $config),
 
+            /**
+             * https://developer.wordpress.org/reference/functions/date_i18n/
+             */
+            new TwigFunction('date_i18n', function(string $format, $timestampWithOffset = false, bool $gmt = false) {
+                return date_i18n($format, $timestampWithOffset, $gmt);
+            }, $config),
+
         ];
     }
 
