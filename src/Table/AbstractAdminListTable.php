@@ -48,18 +48,28 @@ abstract class AbstractAdminListTable
         $screenId = get_current_screen()->id;
         if($screenId === $this->getEditScreenId()) {
 
-            add_filter('list_table_primary_column', [$this, 'tablePrimaryColumn'], 10, 2 );
-            add_action('manage_edit-'. $this->listTableType.'_sortable_columns', [$this, 'defineSortableColumns']);
-            add_filter('manage_' . $this->listTableType . '_posts_columns', array( $this, 'defineColumns' ) );
-            add_filter('bulk_actions-edit-' . $this->listTableType, array( $this, 'defineBulkActions' ) );
-            add_action('manage_' . $this->listTableType . '_posts_custom_column', array( $this, 'renderColumns' ), 10, 2);
-            add_filter('default_hidden_columns',[$this, 'defaultHiddenColumns'], 10, 2);
-            add_filter('post_row_actions', [$this, 'rowActions'], 100, 2);
+            $this->runHooks();
         }
 
         // Ensure the table handler is only loaded once. Prevents multiple loads if a plugin calls check_ajax_referer many times.
         remove_action( 'current_screen', [$this, 'setupTable']);
         remove_action( 'check_ajax_referer', [$this, 'setupTable']);
+    }
+
+    /**
+     * @return void
+     */
+    protected function runHooks(): void
+    {
+        add_filter('list_table_primary_column', [$this, 'tablePrimaryColumn'], 10, 2 );
+        add_action('manage_edit-'. $this->listTableType.'_sortable_columns', [$this, 'defineSortableColumns']);
+        add_filter('manage_' . $this->listTableType . '_posts_columns', [$this, 'defineColumns']);
+        add_filter('bulk_actions-edit-' . $this->listTableType, [$this, 'defineBulkActions']);
+        add_action('manage_' . $this->listTableType . '_posts_custom_column',[$this, 'renderColumns'], 10, 2);
+        add_filter('default_hidden_columns',[$this, 'defaultHiddenColumns'], 10, 2);
+        add_filter('post_row_actions', [$this, 'rowActions'], 100, 2);
+        add_action( 'restrict_manage_posts', [$this, 'restrictManagePosts']);
+        add_filter( 'request', [$this, 'requestQuery']);
     }
 
     /**
@@ -104,6 +114,48 @@ abstract class AbstractAdminListTable
     protected function defineRowActions(array $actions, \WP_Post $post): array
     {
         return $actions;
+    }
+
+    /**
+     * Handle any custom filters
+     *
+     * @param array $queryVars
+     * @return array
+     */
+    protected function applyFilters(array $queryVars): array
+    {
+        return $queryVars;
+    }
+
+    /**
+     * Handle any filters.
+     *
+     * @param array $queryVars
+     * @return array
+     */
+    public function requestQuery(array $queryVars): array
+    {
+        if($this->isThis()) {
+            return $this->applyFilters($queryVars);
+        }
+
+        return $queryVars;
+    }
+
+    /**
+     * Render any custom filters and search inputs for the list table
+     * @return void
+     */
+    protected abstract function renderFilters(): void;
+
+    /**
+     * @return void
+     */
+    public function restrictManagePosts()
+    {
+        if($this->isThis()) {
+            $this->renderFilters();
+        }
     }
 
     /**
@@ -194,6 +246,15 @@ abstract class AbstractAdminListTable
     protected function getEditScreenId(): string
     {
         return 'edit-'.$this->listTableType;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isThis(): bool
+    {
+        global $typenow;
+        return $this->listTableType === $typenow;
     }
 
 }
