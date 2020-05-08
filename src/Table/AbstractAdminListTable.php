@@ -45,10 +45,12 @@ abstract class AbstractAdminListTable
      */
     public function setupTable(): void
     {
-        $screenId = get_current_screen()->id;
-        if($screenId === $this->getEditScreenId()) {
+        if(function_exists('get_current_screen')) {
+            $screenId = \get_current_screen()->id;
+            if ($screenId === $this->getEditScreenId()) {
 
-            $this->runHooks();
+                $this->runHooks();
+            }
         }
 
         // Ensure the table handler is only loaded once. Prevents multiple loads if a plugin calls check_ajax_referer many times.
