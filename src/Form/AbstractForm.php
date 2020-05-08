@@ -86,7 +86,7 @@ abstract class AbstractForm
      */
     public function submit(): void
     {
-        $request = new Request($_REQUEST, [], [], $_COOKIE, $_FILES, $_SERVER);
+        $request = Request::createFromGlobals();
         if(wp_verify_nonce($request->get($this->nonceFieldName), $this->nonceName, false) === false) {
             $response = $this->invalidNonce();
         } else {
