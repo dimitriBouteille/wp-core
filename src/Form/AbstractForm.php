@@ -133,6 +133,22 @@ abstract class AbstractForm
     }
 
     /**
+     * @return string
+     */
+    public function renderFields(): string
+    {
+        $html = '';
+        foreach ($this->getDataForJson() as $name => $value) {
+            $html .= sprintf(
+                '<input type="hidden" name="%s" value="%s" />',
+                $name,
+                $value);
+        }
+
+        return $html;
+    }
+
+    /**
      * Send response with wp_send_json
      *
      * @param Response $response
