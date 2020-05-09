@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
  * Class AbstractForm
  * @package Dbout\WpCore\Form
  *
+ * @method static string action();
+ * @method static string nonce();
+ * @method static string nonceName();
+ * @method static string nonceFieldName();
+ *
  * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
@@ -117,6 +122,17 @@ abstract class AbstractForm
     }
 
     /**
+     * @return array
+     */
+    public function getDataForJson(): array
+    {
+        return [
+            'action' => $this->getAction(),
+            $this->getNonceFieldName() => $this->getNonce(),
+        ];
+    }
+
+    /**
      * Send response with wp_send_json
      *
      * @param Response $response
@@ -151,6 +167,29 @@ abstract class AbstractForm
         }
 
         return self::$instances[$class];
+    }
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return string|null
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        $instance = static::getInstance();
+
+        switch ($name) {
+            case 'action':
+                return $instance->getAction();
+            case 'nonce':
+                return $instance->getNonce();
+            case 'nonceName':
+                return $instance->getNonceName();
+            case 'nonceFieldName':
+                return $instance->getNonceFieldName();
+        }
+
+        return null;
     }
 
 }
