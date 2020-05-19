@@ -87,6 +87,14 @@ abstract class AbstractForm
     protected abstract function execute(Request $request): Response;
 
     /**
+     * @return bool
+     */
+    protected function isAllowed(): bool
+    {
+        return true;
+    }
+
+    /**
      * @return void
      */
     public function submit(): void
@@ -94,6 +102,8 @@ abstract class AbstractForm
         $request = Request::createFromGlobals();
         if(wp_verify_nonce($request->get($this->nonceFieldName), $this->nonceName, false) === false) {
             $response = $this->invalidNonce();
+        } else if(!$this->isAllowed()) {
+            $response = $this->notAllowed();
         } else {
             $response = $this->execute($request);
         }
@@ -107,8 +117,18 @@ abstract class AbstractForm
     protected function invalidNonce(): Response
     {
        return new JsonResponse([
-           'error' => 'Le formulaire n\'est pas valide . Veuillez rafraichir la page pour tenter de corriger le problème . Si le problème persiste, veuillez réessayer dans quelques instants.',
+           'error' => __('Le formulaire n\'est pas valide . Veuillez rafraichir la page pour tenter de corriger le problème . Si le problème persiste, veuillez réessayer dans quelques instants.'),
        ], 400);
+    }
+
+    /**
+     * @return Response
+     */
+    protected function notAllowed(): Response
+    {
+        return new JsonResponse([
+            'error' => __("Droit insuffisant"),
+        ], 401);
     }
 
     /**
