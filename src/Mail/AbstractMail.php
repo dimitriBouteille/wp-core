@@ -10,7 +10,7 @@ namespace Dbout\WpCore\Mail;
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
-abstract class AbstractSwiftMail
+abstract class AbstractMail
 {
 
     /**
@@ -28,8 +28,17 @@ abstract class AbstractSwiftMail
      */
     public function __construct()
     {
-        $this->initSwift();
+        $this->init();
+    }
+
+    /**
+     * Init class
+     */
+    protected function init(): void
+    {
         $this->message = new \Swift_Message();
+        $transporter = apply_filters('dbout_mail_config', new \Swift_SmtpTransport());
+        $this->swiftMailer = new \Swift_Mailer($transporter);
     }
 
     /**
@@ -98,8 +107,6 @@ abstract class AbstractSwiftMail
     }
 
     /**
-     * Send email
-     *
      * @return bool
      */
     public function send(): bool
@@ -113,25 +120,8 @@ abstract class AbstractSwiftMail
     }
 
     /**
-     * Build message
+     * Build body message
+     * @return void
      */
-    protected abstract function build(): void;
-
-    /**
-     * Init swift mailer
-     */
-    private function initSwift(): void
-    {
-        $host = defined('MAIL_HOST') ? MAIL_HOST : get_option('mailserver_url');
-        $port = defined('MAIL_PORT') ? MAIL_PORT : get_option('mailserver_port');
-        $username = defined('MAIL_USERNAME') ? MAIL_USERNAME : get_option('mailserver_login');
-        $password = defined('MAIL_PASSWORD') ? MAIL_PASSWORD : get_option('mailserver_pass');
-
-        $transporter =(new \Swift_SmtpTransport($host, $port))
-            ->setUsername($username)
-            ->setPassword($password);
-
-        $this->swiftMailer = new \Swift_Mailer($transporter);
-    }
-
+    abstract protected function build(): void;
 }
