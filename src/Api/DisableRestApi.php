@@ -19,7 +19,6 @@ class DisableRestApi
     public static function disable(): void
     {
         add_filter('rest_authentication_errors', function($result) {
-
             if ( ! empty( $result ) ) {
                 return $result;
             }
@@ -27,6 +26,8 @@ class DisableRestApi
                 return new \WP_Error( __('invalid_access', 'Oops, impossible d\'accéder à cette page :('));
             }
         });
+
+        remove_action( 'wp_head', 'rest_output_link_wp_head', 10, 0 );
     }
 
 }
