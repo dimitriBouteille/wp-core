@@ -23,4 +23,13 @@ abstract class AbstractFrontForm extends AbstractForm
     {
         return new JsonResponse([ 'errors' => $errors], 400);
     }
+
+    /**
+     * @param string $errors
+     * @return JsonResponse
+     */
+    protected function error(string $error): JsonResponse
+    {
+        return new JsonResponse(['error' => $error], 400);
+    }
 }

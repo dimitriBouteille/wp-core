@@ -27,5 +27,4 @@ class RemoveMetaBox
             remove_meta_box('wpseo_meta', $screens, 'normal');
         }, 100);
     }
-
 }

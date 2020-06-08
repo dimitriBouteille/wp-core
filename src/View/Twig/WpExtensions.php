@@ -130,6 +130,13 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
                 return date_i18n($format, $timestampWithOffset, $gmt);
             }, $config),
 
+            /**
+             * https://developer.wordpress.org/reference/functions/do_shortcode/
+             */
+            new TwigFunction('do_shortcode', function(string $content, bool $ignoreHtml = false) {
+                return do_shortcode($content, $ignoreHtml);
+            }, $config),
+
         ];
     }
 

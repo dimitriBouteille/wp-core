@@ -89,6 +89,7 @@ abstract class AbstractValidator
             } else {
                 $this->validateData[$fieldName] = $value;
             }
+
         }
 
         if(count($this->errors) > 0) {
@@ -120,6 +121,7 @@ abstract class AbstractValidator
     protected function hydrateObject(): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
+
         foreach ($this->getConstraints() as $fieldName => $field) {
 
             if(!$field->isMapped()) {
@@ -127,11 +129,14 @@ abstract class AbstractValidator
             }
 
             $value = $this->request->get($fieldName);
+
             if($field->getProperty()) {
                 $fieldName = $field->getProperty();
             }
 
-            $accessor->setValue($this->object, $fieldName, $value);
+            try {
+                $accessor->setValue($this->object, $fieldName, $value);
+            } catch (\Exception $exception) {}
         }
     }
 

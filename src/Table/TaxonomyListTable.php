@@ -61,7 +61,7 @@ abstract class TaxonomyListTable
      */
     protected function runHooks(): void
     {
-        add_filter('manage_edit-'.$this->taxonomyType.'_columns', [$this, 'defineColumns']);
+        add_filter('manage_edit-'.$this->taxonomyType.'_columns', [$this, 'setupColumns']);
         add_filter('manage_'.$this->taxonomyType.'_custom_column', [$this, 'renderColumn'], 10, 3);
         add_filter('manage_edit-'. $this->taxonomyType.'_sortable_columns', [$this, 'defineSortableColumns']);
         add_filter('bulk_actions-edit-'. $this->taxonomyType, [$this, 'defineBulkActions']);
@@ -73,9 +73,17 @@ abstract class TaxonomyListTable
      * @param array $columns
      * @return array
      */
-    public function defineColumns(array $columns): array
+    public function setupColumns(array $columns): array
     {
-        return $columns;
+        if($this->removeYoastSeoColumns()) {
+            unset($columns['wpseo-score']);
+            unset($columns['wpseo-score-readability']);
+            unset($columns['wpseo-title']);
+            unset($columns['wpseo-metadesc']);
+            unset($columns['wpseo-focuskw']);
+        }
+
+        return $this->defineColumns($columns);
     }
 
     /**
@@ -121,6 +129,12 @@ abstract class TaxonomyListTable
     protected abstract function loadRowData(int $termId): bool;
 
     /**
+     * @param array $columns
+     * @return array
+     */
+    protected abstract function defineColumns(array $columns): array;
+
+    /**
      * @return bool
      */
     protected function isThis(): bool
@@ -135,5 +149,14 @@ abstract class TaxonomyListTable
     protected function getEditScreenId(): string
     {
         return 'edit-'.$this->taxonomyType;
+    }
+
+    /**
+     * If true, remove Yoast Seo columns
+     * @return bool
+     */
+    protected function removeYoastSeoColumns(): bool
+    {
+        return false;
     }
 }
