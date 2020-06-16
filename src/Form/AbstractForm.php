@@ -100,10 +100,10 @@ abstract class AbstractForm
     public function submit(): void
     {
         $request = Request::createFromGlobals();
-        if(wp_verify_nonce($request->get($this->nonceFieldName), $this->nonceName, false) === false) {
-            $response = $this->invalidNonce();
-        } else if(!$this->isAllowed()) {
+        if(!$this->isAllowed()) {
             $response = $this->notAllowed();
+        } else if(wp_verify_nonce($request->get($this->nonceFieldName), $this->nonceName, false) === false) {
+            $response = $this->invalidNonce();
         } else {
             $response = $this->execute($request);
         }
@@ -169,7 +169,7 @@ abstract class AbstractForm
     }
 
     /**
-     * Send response with wp_send_json
+     * Send response
      *
      * @param Response $response
      */
@@ -227,5 +227,4 @@ abstract class AbstractForm
 
         return null;
     }
-
 }

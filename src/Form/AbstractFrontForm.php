@@ -16,6 +16,8 @@ abstract class AbstractFrontForm extends AbstractForm
 {
 
     /**
+     * Returns form errors
+     *
      * @param array $errors
      * @return JsonResponse
      */
@@ -25,11 +27,37 @@ abstract class AbstractFrontForm extends AbstractForm
     }
 
     /**
+     * Returns error message
+     *
      * @param string $errors
      * @return JsonResponse
      */
     protected function error(string $error): JsonResponse
     {
         return new JsonResponse(['error' => $error], 400);
+    }
+
+    /**
+     * Returns custom message
+     *
+     * @param string $message
+     * @param int $code
+     * @return JsonResponse
+     */
+    protected function message(string $message, int $code = 200)
+    {
+        return new JsonResponse(['message' => $message, 'code' => $code,], $code);
+    }
+
+    /**
+     * Returns html content
+     *
+     * @param string $html
+     * @param int $code
+     * @return JsonResponse
+     */
+    protected function html(string $html, int $code = 200)
+    {
+        return new JsonResponse(['html' => $message, 'code' => $code,], $code);
     }
 }
