@@ -52,12 +52,12 @@ abstract class AbstractFrontForm extends AbstractForm
     /**
      * Returns html content
      *
-     * @param string $html
+     * @param mixed $html
      * @param int $code
      * @return JsonResponse
      */
-    protected function html(string $html, int $code = 200)
+    protected function html($html, int $code = 200)
     {
-        return new JsonResponse(['html' => $message, 'code' => $code,], $code);
+        return new JsonResponse(['html' => $html, 'code' => $code,], $code);
     }
 }
