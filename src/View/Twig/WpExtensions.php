@@ -27,6 +27,7 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
     {
         return [
             '_' => $this,
+            'wp_ajax_url' => admin_url('admin-ajax.php')
         ];
     }
 
