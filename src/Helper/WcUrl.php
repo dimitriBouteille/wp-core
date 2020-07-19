@@ -65,7 +65,11 @@ class WcUrl
      */
     public function getAccountEndpoint(string $endpoint): ?string
     {
-        return wc_get_account_endpoint_url($endpoint);
+        if($this->wooIsActivated()) {
+            return wc_get_account_endpoint_url($endpoint);
+        }
+
+        return null;
     }
 
     /**
@@ -74,7 +78,11 @@ class WcUrl
      */
     protected function getUrl(string $name): ?string
     {
-        return wc_get_page_permalink($name);
+        if($this->wooIsActivated()) {
+            return wc_get_page_permalink($name);
+        }
+
+        return null;
     }
 
     /**
@@ -90,5 +98,13 @@ class WcUrl
         }
 
         throw new \Exception(sprintf("The url %s not found", $name));
+    }
+
+    /**
+     * @return bool
+     */
+    private function wooIsActivated(): bool
+    {
+        return class_exists('woocommerce');
     }
 }
