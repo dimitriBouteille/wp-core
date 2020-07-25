@@ -138,7 +138,19 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
                 return do_shortcode($content, $ignoreHtml);
             }, $config),
 
+            /**
+             * Create url from theme root
+             */
+            new TwigFunction('theme_url', function ($url) {
+                return trim(get_template_directory_uri(), '/') . '/' . ltrim($url, '/');
+            }, $config),
+
+            /**
+             * Create url from root
+             */
+            new TwigFunction('url', function ($url, ?string $schema = null, ?int $blogId = null) {
+                return get_site_url($blogId, $url, $schema);
+            }),
         ];
     }
-
 }
