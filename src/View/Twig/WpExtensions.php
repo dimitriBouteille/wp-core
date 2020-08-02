@@ -27,7 +27,7 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
     {
         return [
             '_' => $this,
-            'wp_ajax_url' => admin_url('admin-ajax.php')
+            'wp_ajax_url' => wp_ajax_url()
         ];
     }
 
@@ -142,14 +142,14 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
              * Create url from theme root
              */
             new TwigFunction('theme_url', function ($url) {
-                return trim(get_template_directory_uri(), '/') . '/' . ltrim($url, '/');
+                return theme_url($url);
             }, $config),
 
             /**
              * Create url from root
              */
             new TwigFunction('url', function ($url, ?string $schema = null, ?int $blogId = null) {
-                return get_site_url($blogId, $url, $schema);
+                return url($url, $schema, $blogId);
             }),
         ];
     }

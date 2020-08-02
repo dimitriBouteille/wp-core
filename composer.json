@@ -24,6 +24,9 @@
     "symfony/http-foundation": "^4.3"
   },
   "autoload": {
+    "files": [
+      "src/includes/helpers.php"
+    ],
     "psr-4": {
       "Dbout\\WpCore\\": "src/"
     }
