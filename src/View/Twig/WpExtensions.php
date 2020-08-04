@@ -27,7 +27,7 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
     {
         return [
             '_' => $this,
-            'wp_ajax_url' => wp_ajax_url()
+            'wp_ajax_url' => _wp_ajax_url()
         ];
     }
 
