@@ -142,14 +142,14 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
              * Create url from theme root
              */
             new TwigFunction('theme_url', function ($url) {
-                return theme_url($url);
+                return _theme_url($url);
             }, $config),
 
             /**
              * Create url from root
              */
             new TwigFunction('url', function ($url, ?string $schema = null, ?int $blogId = null) {
-                return url($url, $schema, $blogId);
+                return _url($url, $schema, $blogId);
             }),
         ];
     }
