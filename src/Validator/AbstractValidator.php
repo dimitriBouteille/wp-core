@@ -82,7 +82,7 @@ abstract class AbstractValidator
                 continue;
             }
 
-            $value = $this->request->get($fieldName);
+            $value = $this->getData($fieldName);
             $violations = $this->validator->validate($value, $field->getConstraints());
             if(count($violations) > 0) {
                 $this->errors[$fieldName] = $violations;
@@ -128,8 +128,7 @@ abstract class AbstractValidator
                 continue;
             }
 
-            $value = $this->request->get($fieldName);
-
+            $value = $this->getData($fieldName);
             if($field->getProperty()) {
                 $fieldName = $field->getProperty();
             }
@@ -140,4 +139,12 @@ abstract class AbstractValidator
         }
     }
 
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    protected function getData(string $key)
+    {
+        return $this->request->get($key);
+    }
 }
