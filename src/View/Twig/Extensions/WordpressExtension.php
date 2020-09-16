@@ -1,20 +1,21 @@
 <?php
 
-namespace Dbout\WpCore\View\Twig;
+namespace Dbout\WpCore\View\Twig\Extensions;
 
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 /**
- * Class WpExtensions
- * @package Dbout\WpCore\View\Twig
+ * Class WordpressExtension
+ * @package Dbout\WpCore\View\Twig\Extensions
  *
  * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
-class WpExtensions extends AbstractExtension implements GlobalsInterface
+class WordpressExtension extends AbstractExtension implements GlobalsInterface
 {
 
     /**
@@ -23,7 +24,7 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
      *
      * @return array
      */
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [
             '_' => $this,
@@ -57,58 +58,42 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
             /**
              * https://developer.wordpress.org/reference/functions/get_the_post_thumbnail_url/
              */
-            new TwigFunction('get_the_post_thumbnail_url', function($post, $size = null) {
-                return get_the_post_thumbnail_url($post, $size);
-            }, $config),
+            new TwigFunction('get_the_post_thumbnail_url', 'get_the_post_thumbnail_url', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/wp_get_attachment_url/
              */
-            new TwigFunction('wp_get_attachment_url', function ($attachmentId) {
-                return wp_get_attachment_url($attachmentId);
-            }, $config),
+            new TwigFunction('wp_get_attachment_url', 'wp_get_attachment_url', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/get_permalink/
              */
-            new TwigFunction('get_permalink', function ($post,bool $leaveName = false) {
-                return get_permalink($post, $leaveName);
-            }, $config),
+            new TwigFunction('get_permalink', 'get_permalink', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/get_the_date/
              */
-            new TwigFunction('get_the_date', function (string $format = '', $post = null) {
-                return get_the_date($format, $post);
-            }, $config),
+            new TwigFunction('get_the_date', 'get_the_date', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/__/
              */
-            new TwigFunction('__', function(string $text, string $domain = 'default') {
-                return __($text, $domain);
-            }, $config),
+            new TwigFunction('__', '__', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/admin_url/
              */
-            new TwigFunction('admin_url', function(string $path, string $schema = 'admin') {
-                return admin_url($path, $schema);
-            }, $config),
+            new TwigFunction('admin_url', 'admin_url', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/get_option/
              */
-            new TwigFunction('get_option', function(string $option, $default = false) {
-                return get_option($option, $default);
-            }, $config),
+            new TwigFunction('get_option', 'get_option', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/esc_html_e/
              */
-            new TwigFunction('esc_html_e', function(string $text, string $domain = 'default') {
-                return esc_html_e($text, $domain);
-            }, $config),
+            new TwigFunction('esc_html_e', 'esc_html_e', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/do_action/
@@ -120,23 +105,37 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
             /**
              * https://developer.wordpress.org/reference/functions/the_widget/
              */
-            new TwigFunction('the_widget', function(string $widget, array $widgetArguments = [], array $args = []) {
-                return the_widget($widget, $widgetArguments, $args);
-            }, $config),
+            new TwigFunction('the_widget', 'the_widget', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/date_i18n/
              */
-            new TwigFunction('date_i18n', function(string $format, $timestampWithOffset = false, bool $gmt = false) {
-                return date_i18n($format, $timestampWithOffset, $gmt);
-            }, $config),
+            new TwigFunction('date_i18n', 'date_i18n', $config),
 
             /**
              * https://developer.wordpress.org/reference/functions/do_shortcode/
              */
-            new TwigFunction('do_shortcode', function(string $content, bool $ignoreHtml = false) {
-                return do_shortcode($content, $ignoreHtml);
-            }, $config),
+            new TwigFunction('do_shortcode', 'do_shortcode', $config),
+
+            /**
+             * https://developer.wordpress.org/reference/functions/bloginfo/
+             */
+            new TwigFunction('bloginfo', 'bloginfo', $config),
+
+            /**
+             * https://developer.wordpress.org/reference/functions/_e/
+             */
+            new TwigFunction('_e', '_e', $config),
+
+            /**
+             * https://developer.wordpress.org/reference/functions/_n/
+             */
+            new TwigFunction('_n', '_n', $config),
+
+            /**
+             * https://developer.wordpress.org/reference/functions/_x/
+             */
+            new TwigFunction('_x', '_x', $config),
 
             /**
              * Create url from theme root
@@ -151,6 +150,24 @@ class WpExtensions extends AbstractExtension implements GlobalsInterface
             new TwigFunction('url', function ($url, ?string $schema = null, ?int $blogId = null) {
                 return _url($url, $schema, $blogId);
             }),
+        ];
+    }
+
+    /**
+     * Register a list of Wordpress filters inside Twig templates
+     *
+     * @return array|TwigFilter[]
+     */
+    public function getFilters()
+    {
+        $config = ['is_safe' => ['html']];
+
+        return [
+
+            /**
+             * https://developer.wordpress.org/reference/functions/wpautop/
+             */
+            new TwigFilter('wpautop', 'wpautop', $config),
         ];
     }
 }

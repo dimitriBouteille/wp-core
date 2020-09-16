@@ -16,12 +16,18 @@
   "support": {
     "issues": "https://github.com/dimitriBouteille/wp-core/issues"
   },
+  "config": {
+    "platform": {
+      "php": "7.3"
+    }
+  },
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.3.0",
     "symfony/validator": "^4.3",
     "symfony/property-access": "^4.3",
-    "symfony/http-foundation": "^4.3"
+    "symfony/http-foundation": "^4.3",
+    "twig/twig": "3.0.*"
   },
   "autoload": {
     "files": [
