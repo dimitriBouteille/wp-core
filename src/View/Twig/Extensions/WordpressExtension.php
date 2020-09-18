@@ -2,6 +2,10 @@
 
 namespace Dbout\WpCore\View\Twig\Extensions;
 
+use Dbout\WpCore\FileHelper;
+use Dbout\WpCore\Site;
+use Dbout\WpCore\Theme;
+use Dbout\WpCore\UrlHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
@@ -28,7 +32,9 @@ class WordpressExtension extends AbstractExtension implements GlobalsInterface
     {
         return [
             '_' => $this,
-            'wp_ajax_url' => _wp_ajax_url()
+            'wp_ajax_url' => _wp_ajax_url(),
+            'theme' => Theme::getInstance(),
+            'site' => new Site(),
         ];
     }
 
@@ -168,6 +174,34 @@ class WordpressExtension extends AbstractExtension implements GlobalsInterface
              * https://developer.wordpress.org/reference/functions/wpautop/
              */
             new TwigFilter('wpautop', 'wpautop', $config),
+
+            /**
+             * Check if file is an Video
+             */
+            new TwigFilter('isVideo', function($file) {
+                return FileHelper::isVideo($file);
+            }, $config),
+
+            /**
+             * Check if file is an SVG
+             */
+            new TwigFilter('isSvg', function ($file) {
+                return FileHelper::isSvg($file);
+            }, $config),
+
+            /**
+             * Check if file is an Image
+             */
+            new TwigFilter('isImage', function ($file) {
+                return FileHelper::isImage($file);
+            }, $config),
+
+            /**
+             * Check if url is an URL
+             */
+            new TwigFilter('isUrl', function ($url) {
+                return UrlHelper::isUrl($url);
+            }, $config),
         ];
     }
 }

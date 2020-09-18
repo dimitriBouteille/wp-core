@@ -133,5 +133,4 @@ class ImageSize
         $this->label = $label;
         return $this;
     }
-
 }

@@ -121,7 +121,6 @@ abstract class AbstractValidator
     protected function hydrateObject(): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
-
         foreach ($this->getConstraints() as $fieldName => $field) {
 
             if(!$field->isMapped()) {

@@ -1,12 +1,10 @@
 <?php
 
-namespace Dbout\WpCore\Helper;
-
-use http\Encoding\Stream;
+namespace Dbout\WpCore;
 
 /**
  * Class Site
- * @package Dbout\WpCore\Helper
+ * @package Dbout\WpCore
  *
  * @method string name();
  * @method string description();
@@ -20,7 +18,6 @@ use http\Encoding\Stream;
  * @method string rdfUrl();
  * @method string rssUrl();
  * @method string wpVersion();
- * @method Theme theme();
  *
  * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
  * @link        https://github.com/dimitriBouteille Github
@@ -95,11 +92,6 @@ class Site
     public $wpVersion;
 
     /**
-     * @var Theme
-     */
-    public $theme;
-
-    /**
      * Site constructor.
      */
     public function __construct()
@@ -125,8 +117,6 @@ class Site
         $this->rdfUrl = $this->getInfo('rdf_url');
         $this->rssUrl = $this->getInfo('rss_url');
         $this->rss2Url = $this->getInfo('rss2_url');
-
-        $this->theme = Theme::getInstance();
     }
 
     /**
