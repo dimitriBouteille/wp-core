@@ -5,6 +5,10 @@ namespace Dbout\WpCore;
 /**
  * Class UrlHelper
  * @package Dbout\WpCore
+ *
+ * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
+ * @link        https://github.com/dimitriBouteille Github
+ * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
 class UrlHelper
 {
@@ -59,5 +63,18 @@ class UrlHelper
         }
 
         return null;
+    }
+
+    /**
+     * @param string|null $url
+     * @return bool
+     */
+    public static function isLocal(?string $url): bool
+    {
+        if (!$url) {
+            return false;
+        }
+
+        return strstr($url, self::getHost());
     }
 }
