@@ -1,10 +1,10 @@
 <?php
 
-namespace Dbout\WpCore\Helper;
+namespace Dbout\WpCore;
 
 /**
  * Class Theme
- * @package Dbout\WpCore\Helper
+ * @package Dbout\WpCore
  *
  * https://developer.wordpress.org/reference/functions/wp_get_theme/
  *
@@ -160,5 +160,4 @@ class Theme
     {
         return $this->config;
     }
-
 }

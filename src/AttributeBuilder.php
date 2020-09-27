@@ -1,10 +1,10 @@
 <?php
 
-namespace Dbout\WpCore\Html;
+namespace Dbout\WpCore;
 
 /**
  * Class AttributeBuilder
- * @package Dbout\WpCore\Html
+ * @package Dbout\WpCore
  *
  * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
  * @link        https://github.com/dimitriBouteille Github
@@ -56,5 +56,4 @@ class AttributeBuilder
 
         return sprintf('%s="%s"', $key, $value);
     }
-
 }

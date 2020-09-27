@@ -22,6 +22,8 @@ use Symfony\Component\HttpFoundation\Response;
 abstract class AbstractForm
 {
 
+    use FormResponseHelper;
+
     /**
      * @var self[]
      */

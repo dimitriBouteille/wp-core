@@ -30,6 +30,7 @@ class PostType
         'labels' =>         [],
         'public' =>         true,
         'show_in_rest' =>   false,
+        'supports' =>       [],
     ];
 
     /**
@@ -133,5 +134,4 @@ class PostType
     {
         return new PostType($slug, $singularName, $pluralName);
     }
-
 }

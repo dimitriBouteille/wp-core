@@ -10,7 +10,7 @@ namespace Dbout\WpCore\Form;
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
-abstract class AbstractAdminForm extends AbstractFrontForm
+abstract class AbstractAdminForm extends AbstractForm
 {
     /**
      * @var bool

@@ -24,11 +24,11 @@ class Theme extends AbstractFacade
 {
 
     /**
-     * @return \Dbout\WpCore\Helper\Theme|mixed
+     * @return \Dbout\WpCore\Helpers\Theme|mixed
      */
     protected static function getInstance()
     {
-        return \Dbout\WpCore\Helper\Theme::getInstance();
+        return \Dbout\WpCore\Helpers\Theme::getInstance();
     }
 
 }

@@ -5,14 +5,14 @@ namespace Dbout\WpCore\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class AbstractFrontForm
+ * Trait FormResponseHelper
  * @package Dbout\WpCore\Form
  *
  * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
-abstract class AbstractFrontForm extends AbstractForm
+trait FormResponseHelper
 {
 
     /**
@@ -23,13 +23,13 @@ abstract class AbstractFrontForm extends AbstractForm
      */
     protected function formErrors(array $errors): JsonResponse
     {
-        return new JsonResponse([ 'errors' => $errors], 400);
+        return new JsonResponse(['errors' => $errors], 400);
     }
 
     /**
      * Returns error message
      *
-     * @param string $errors
+     * @param string $error
      * @return JsonResponse
      */
     protected function error(string $error): JsonResponse

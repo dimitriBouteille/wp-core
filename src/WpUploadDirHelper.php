@@ -1,10 +1,10 @@
 <?php
 
-namespace Dbout\WpCore\Helper;
+namespace Dbout\WpCore;
 
 /**
- * Class UploadDir
- * @package Dbout\WpCore\Helper
+ * Class WpUploadDirHelper
+ * @package Dbout\WpCore
  *
  * https://developer.wordpress.org/reference/functions/wp_upload_dir/
  *
@@ -12,7 +12,7 @@ namespace Dbout\WpCore\Helper;
  * @link        https://github.com/dimitriBouteille Github
  * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
-class UploadDir
+class WpUploadDirHelper
 {
 
     /**
@@ -47,7 +47,6 @@ class UploadDir
         return self::getProperty('basedir');
     }
 
-
     /**
      * @return string
      */
@@ -69,5 +68,4 @@ class UploadDir
 
         return null;
     }
-
 }
