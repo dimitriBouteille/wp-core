@@ -133,7 +133,8 @@ class WoocommerceHelper
      */
     public static function isActivated(): bool
     {
-        return class_exists('woocommerce');
+        $pluginList = get_option('active_plugins');
+        return in_array('woocommerce/woocommerce.php', $pluginList);
     }
 
     /**
