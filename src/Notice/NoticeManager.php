@@ -16,12 +16,12 @@ class NoticeManager
     /**
      * @var self
      */
-    protected static $instance;
+    protected static self $instance;
 
     /**
      * @var Notice[]
      */
-    protected $notices = [];
+    protected array $notices = [];
 
     /**
      * @param string $message
@@ -78,7 +78,7 @@ class NoticeManager
     /**
      * @return NoticeManager
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if(!self::$instance) {
             self::$instance = new self();
@@ -94,5 +94,4 @@ class NoticeManager
     {
         add_action('admin_notices', [new NoticeRender($notice), 'display']);
     }
-
 }

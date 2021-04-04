@@ -35,28 +35,28 @@ abstract class AbstractForm
      *
      * @var string
      */
-    protected $action;
+    protected string $action;
 
     /**
      * Form nonce name
      *
      * @var string
      */
-    protected $nonceName;
+    protected string $nonceName;
 
     /**
      * If true, Fires ajax actions for logged-out users.
      *
      * @var bool
      */
-    protected $noLoggedUser = true;
+    protected bool $noLoggedUser = true;
 
     /**
      * Form nonce field name
      *
      * @var string
      */
-    protected $nonceFieldName = '_token';
+    protected string $nonceFieldName = '_token';
 
     /**
      * @return string
@@ -129,7 +129,7 @@ abstract class AbstractForm
     protected function notAllowed(): Response
     {
         return new JsonResponse([
-            'error' => __("Droit insuffisant"),
+            'error' => "Droit insuffisant",
         ], 401);
     }
 

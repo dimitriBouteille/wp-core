@@ -16,7 +16,7 @@ class NoticeRender
     /**
      * @var Notice
      */
-    private $notice;
+    private Notice $notice;
 
     /**
      * NoticeRender constructor.
@@ -86,5 +86,4 @@ class NoticeRender
         $attributes[] = sprintf('class="%s"', $this->getNoticeClass());
         return implode(' ', $attributes);
     }
-
 }

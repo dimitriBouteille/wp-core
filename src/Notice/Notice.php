@@ -24,17 +24,17 @@ class Notice
      *
      * @var string|null
      */
-    private $type;
+    private string $type;
 
     /**
      * @var string
      */
-    private $message;
+    private string $message;
 
     /**
      * @var bool
      */
-    private $dismissible = true;
+    private bool $dismissible = true;
 
     /**
      * @return string|null
@@ -89,5 +89,4 @@ class Notice
         $this->dismissible = $dismissible;
         return $this;
     }
-
 }

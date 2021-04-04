@@ -44,7 +44,7 @@ trait FormResponseHelper
      * @param int $code
      * @return JsonResponse
      */
-    protected function message(string $message, int $code = 200)
+    protected function message(string $message, int $code = 200): JsonResponse
     {
         return new JsonResponse(['message' => $message, 'code' => $code,], $code);
     }
@@ -56,7 +56,7 @@ trait FormResponseHelper
      * @param int $code
      * @return JsonResponse
      */
-    protected function html($html, int $code = 200)
+    protected function html($html, int $code = 200): JsonResponse
     {
         return new JsonResponse(['html' => $html, 'code' => $code,], $code);
     }

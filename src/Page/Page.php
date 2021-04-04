@@ -19,52 +19,52 @@ class Page
      *
      * @var string
      */
-    private $slug;
+    protected string $slug;
 
     /**
      * Page title in navigation
      *
      * @var string
      */
-    private $menuTitle;
+    protected string $menuTitle;
 
     /**
      * Page title
      *
      * @var string
      */
-    private $pageTitle;
+    protected string $pageTitle;
 
     /**
      * Icon for menu
      *
      * @var string
      */
-    private $icon = '';
+    protected string $icon = '';
 
     /**
      * Page position in navigation
      *
      * @var int
      */
-    private $position;
+    protected int $position;
 
     /**
      * @var string
      */
-    private $capability = 'manage_options';
+    protected string $capability = 'manage_options';
 
     /**
      * Callback function to be called to output the content
      *
      * @var array|null
      */
-    private $callback = null;
+    protected $callback = null;
 
     /**
      * @var null|string
      */
-    private $subPage = null;
+    protected ?string $subPage = null;
 
     /**
      * Page constructor.

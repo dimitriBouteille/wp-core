@@ -18,7 +18,7 @@ class PostType
      *
      * @var string
      */
-    private $slug;
+    protected string $slug;
 
     /**
      * Arguments for register_post_type function
@@ -26,7 +26,7 @@ class PostType
      *
      * @var array
      */
-    protected $arguments = [
+    protected array $arguments = [
         'labels' =>         [],
         'public' =>         true,
         'show_in_rest' =>   false,

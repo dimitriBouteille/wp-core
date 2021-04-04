@@ -15,5 +15,5 @@ abstract class AbstractAdminForm extends AbstractForm
     /**
      * @var bool
      */
-    protected $noLoggedUser = false;
+    protected bool $noLoggedUser = false;
 }
