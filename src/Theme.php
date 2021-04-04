@@ -21,9 +21,9 @@ class Theme
     private $config = [];
 
     /**
-     * @var self
+     * @var self|null
      */
-    private static self $instance;
+    private static ?self $instance = null;
 
     /**
      * Theme constructor.
