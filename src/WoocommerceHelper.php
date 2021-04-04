@@ -18,7 +18,7 @@ class WoocommerceHelper
     /**
      * @var array
      */
-    protected static $urls = [];
+    protected static array $urls = [];
 
     /**
      * @return string|null

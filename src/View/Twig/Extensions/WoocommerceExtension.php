@@ -22,7 +22,7 @@ class WoocommerceExtension extends AbstractExtension
      *
      * @return array|TwigFunction[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         $config = ['is_safe' => ['html']];
 

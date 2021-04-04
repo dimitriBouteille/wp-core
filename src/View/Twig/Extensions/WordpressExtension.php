@@ -55,7 +55,7 @@ class WordpressExtension extends AbstractExtension implements GlobalsInterface
      *
      * @return array|TwigFunction[]
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         $config = ['is_safe' => ['html']];
 
@@ -164,7 +164,7 @@ class WordpressExtension extends AbstractExtension implements GlobalsInterface
      *
      * @return array|TwigFilter[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         $config = ['is_safe' => ['html']];
 

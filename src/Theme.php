@@ -23,7 +23,7 @@ class Theme
     /**
      * @var self
      */
-    private static $instance;
+    private static self $instance;
 
     /**
      * Theme constructor.

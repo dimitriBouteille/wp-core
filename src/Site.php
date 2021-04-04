@@ -27,69 +27,69 @@ class Site
 {
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $description;
-
-    /**
-     * @var string
-     */
-    public $url;
-
-    /**
-     * @var string
-     */
-    public $siteUrl;
-
-    /**
-     * @var string
-     */
-    public $language;
-
-    /**
-     * @var string
-     */
-    public $charset;
+    public ?string $name;
 
     /**
      * @var string|null
      */
-    public $adminEmail;
+    public ?string $description;
 
     /**
      * @var string|null
      */
-    public $pingbackUrl;
+    public ?string $url;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $atomUrl;
+    public ?string $siteUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $rdfUrl;
+    public ?string $language;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $rssUrl;
+    public ?string $charset;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $rss2Url;
+    public ?string $adminEmail;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $wpVersion;
+    public ?string $pingbackUrl;
+
+    /**
+     * @var string|null
+     */
+    public ?string $atomUrl;
+
+    /**
+     * @var string|null
+     */
+    public ?string $rdfUrl;
+
+    /**
+     * @var string|null
+     */
+    public ?string $rssUrl;
+
+    /**
+     * @var string|null
+     */
+    public ?string $rss2Url;
+
+    /**
+     * @var string|null
+     */
+    public ?string $wpVersion;
 
     /**
      * Site constructor.
@@ -121,9 +121,9 @@ class Site
 
     /**
      * @param string $key
-     * @return string|void
+     * @return string|null
      */
-    protected function getInfo(string $key)
+    protected function getInfo(string $key): ?string
     {
         return get_bloginfo($key);
     }

@@ -18,7 +18,7 @@ class TemplateRegister
     /**
      * @var array
      */
-    protected $templates = [];
+    protected array $templates = [];
 
     /**
      * Add new template

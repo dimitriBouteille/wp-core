@@ -16,7 +16,7 @@ class UrlHelper
     /**
      * @return string
      */
-    public static function getCurrentUrl()
+    public static function getCurrentUrl(): string
     {
         $pageURL = self::getScheme()."://";
         if ( isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] && $_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
