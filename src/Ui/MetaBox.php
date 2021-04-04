@@ -6,7 +6,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class MetaBox
- * @package App\Ui
+ * @package Dbout\WpCore\Ui
+ *
+ * @author      Dimitri BOUTEILLE <bonjour@dimitri-bouteille.fr>
+ * @link        https://github.com/dimitriBouteille Github
+ * @copyright   (c) 2020 Dimitri BOUTEILLE
  */
 abstract class MetaBox
 {
