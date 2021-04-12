@@ -62,6 +62,7 @@ abstract class MetaBox
         add_action('admin_enqueue_scripts', [$this, 'registerJsVars']);
         add_action('postbox_classes_'.$this->postType.'_'. $this->boxId, [$this, 'addClasses']);
         add_action('save_post_'. $this->postType, [$this, 'save'], 10, 2);
+        add_action('admin_footer', [$this, 'displayInFooter']);
     }
 
     /**
@@ -155,5 +156,23 @@ abstract class MetaBox
      */
     protected function _save(\WP_Post $post, Request $request): void
     {
+    }
+
+    /**
+     * @return void
+     */
+    protected function _displayInFooter(): void
+    {
+
+    }
+
+    /**
+     * @return void
+     */
+    public function displayInFooter()
+    {
+        if ($this->isThis()) {
+            $this->_displayInFooter();
+        }
     }
 }
