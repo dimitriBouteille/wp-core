@@ -124,7 +124,7 @@ abstract class MetaBox
     protected function isThis(): bool
     {
         global $current_screen;
-        if (!$current_screen || $current_screen->post_type !== $this->postType) {
+        if (!$current_screen || $current_screen->post_type !== $this->postType || $current_screen->base !== 'post') {
             return false;
         }
 
