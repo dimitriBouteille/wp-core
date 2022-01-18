@@ -44,8 +44,8 @@ abstract class AbstractListTable
     public function setupTable(): void
     {
         if(function_exists('get_current_screen')) {
-            $screenId = \get_current_screen()->id;
-            if ($screenId === $this->getEditScreenId()) {
+            $screen = \get_current_screen();
+            if ($screen && isset($screen->id) && $screen->id === $this->getEditScreenId()) {
                 $this->runHooks();
             }
         }
